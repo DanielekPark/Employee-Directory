@@ -18,7 +18,7 @@ function fetchData(url){
     return fetch(url)
               .then(checkStatus)
               .then(res => res.json() )
-              .catch(error => console.log('Looks like there was problme', error) )
+              .catch(error => console.log('Looks like there was problem', error) )
   }
 
 function checkStatus(response){
