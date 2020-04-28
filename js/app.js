@@ -9,14 +9,11 @@ const info = document.querySelector('#info');
 const modal = document.querySelector('.modal'); //overlay
 const modalContent = document.querySelector('.modal-content'); 
 const cards = document.querySelectorAll('.card');
-const close = document.querySelector(".close");
+const close = document.querySelectorAll(".close");
 
 /* ===================================== 
    FUNCTIONS
 ======================================== */
-const show = event => {
-  info.style.display = 'block'; 
-}
 
 function checkStatus(response){
   if(response.ok){
@@ -60,10 +57,48 @@ function displayEmployees(employeeData){
   
 }
 
+function displayModal(index){
+  let {
+    name,
+    dob,
+    phone,
+    email, 
+    location: { city, street, state, postcode},
+    picture
+  } = employees[index]
+  let date = new Date(dob.date); 
+  const modalHTML = `
+    <span class="close">&times;</span> 
+    <div>
+      <img src=${picture.medium} alt>
+      <p>${name.first} ${name.last}</p>
+      <p>${email}</p>
+      <p>${phone}</p>
+      <p>${city} ${street.name} ${state} ${postcode}</p>
+      <p>${date}</p>
+    </div>
+  `
+  info.style.display = 'block';
+  modalContent.innerHTML = modalHTML; 
+}
+
 /* ===================================== 
    EVENT LISTENERS
 ======================================== */
+gridContainer.addEventListener('click', () => {
+  if(event.target !== gridContainer){
+    const card = event.target.closest('.card'); 
+    const index = card.getAttribute('data-index');
+    displayModal(index)
+  }
+})
 
+modal.addEventListener('click', event => {
+    const close = event.target; 
+    if(close.className === 'close'){
+      modal.style.display ='none'; 
+    }
+})
 
 
 /* ===================================== 
@@ -74,9 +109,6 @@ fetchData(urlAPI)
   //.then(data => console.log(data))
   .then(data => displayEmployees(data))
 
-
-  
-
-  
+ 
 
 })
