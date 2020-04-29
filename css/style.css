@@ -10,13 +10,16 @@ h1{
   text-align: center;
 }
 
-.card:hover{
-  cursor: pointer;
+img{
+  border-radius: 50%;
+  flex-basis: 25%;
+  align-self: center;
+  width: 25%;
 }
 
-img{
-  border-radius: 100%;
-  width: 25%;
+input{
+  width: 45%; 
+  margin: 0 auto; 
 }
 /* ===================================== 
  MAIN CONTENT
@@ -30,53 +33,69 @@ img{
   grid-gap: 15px;
 }
 
+.wrapper,
 .card,
 .text-container{
-    display: flex; 
+  display: flex; 
+}
+
+.card:hover{
+  cursor: pointer;
 }
 
 .card{
   border: solid grey 1px;
   justify-content: space-between;
 }
+
 .text-container{
   flex-direction: column;
+  flex-basis: 70%;
+  word-break: break-all; 
 }
 
 /* ===================================== 
  MODAL WINDOW
 ======================================== */
 .modal{
-display: none;
-position: fixed;
-z-index: 1;
-top: 0;
-width: 100%;
-height: 100%;
-overflow: auto;
-background-color: rgba(0,0,0,0.4); 
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4); 
 }
 
 .modal-content{
-background-color: #fefefe;
-margin: 15% auto;
-padding: 20px;
-border: 1px solid #888;
-width: 50%;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
 }
 
 .close {
-color: #aaa;
-float: right;
-font-size: 28px;
-font-weight: bold;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-color: black;
-text-decoration: none;
-cursor: pointer;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+/*
+CODE FOR MODAL WINDOW
+https://www.w3schools.com/howto/howto_css_modals.asp
+*/
+.modal-img{
+  display: block; 
+  margin: 0 auto; 
 }
 
 ul{
@@ -86,16 +105,21 @@ ul{
 li{
   list-style-type: none;
 }
-/*
-CODE FOR MODAL WINDOW
-https://www.w3schools.com/howto/howto_css_modals.asp
-*/
+
 
 /* ===================================== 
  MEDIA QUERIES
 ======================================== */
 @media(min-width: 768px) {
+  img {
+    margin-left: 10px;
+  }
+
+  .card {
+    justify-content: space-between;
+  }
+
   .grid-container {
-    grid-gap: 80px; 
+    grid-gap: 25px; 
   }
 }

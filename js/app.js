@@ -7,7 +7,7 @@ const urlAPI = 'https://randomuser.me/api/?results=12&inc=name,%20picture,%20ema
 const gridContainer = document.querySelector('.grid-container');
 const info = document.querySelector('#info');
 const modal = document.querySelector('.modal'); //overlay
-const modalContent = document.querySelector('.modal-content'); 
+const modalContent = document.querySelector('.modal-content');
 
 /* ===================================== 
    FUNCTIONS
@@ -40,7 +40,7 @@ function displayEmployees(employeeData){
 
     employeeHTML += 
       `<div class="card" data-index="${index}">
-          <img class="avatar" src="${pictures.thumbnail}">
+          <img class="avatar" src="${pictures.medium}">
           <div class="text-container">
             <p class="name">${name.first} ${name.last}</p>
             <p class="email">${email}</p>
@@ -68,9 +68,9 @@ function displayModal(index){
   const modalHTML = `
     <div class="close">&times;</div> 
     <div>
-      <img src=${picture.medium} alt>
+      <img class="modal-img" src=${picture.medium} alt>
       <ul>
-        <li><h3>${name.first} ${name.last}</h3></li>
+        <li><h3 class="name">${name.first} ${name.last}</h3></li>
         <li>${email}</li>
         <li>${phone}</li>
         <li>${city} ${street.name} ${state} ${postcode}</p>
@@ -85,6 +85,44 @@ function displayModal(index){
 /* ===================================== 
    EVENT LISTENERS
 ======================================== */
+                /* ===================================== 
+                  SEARCH FUNCTION
+                ======================================== */
+// const input = document.querySelector('input'); 
+// const textContainer = document.querySelectorAll('.text-container'); 
+
+// const search = event => {
+//   const searchNames = event.target.value.toLowerCase(); 
+  
+//   textContainer.forEach(name => {
+//     const employeeCard = name.firstElementChild.textContent; 
+//     const container = employeeCard.parentElement;
+
+//     if(container.indexOf(searchNames) > -1){
+//       container.style.display ='grid';
+//     }else{
+//       container.style.display ='none'; 
+//     }
+//   })
+// }
+// input.addEventListener('keyup', search); 
+
+const search = () => {
+  const input = document.querySelector('input'); 
+  let filter = input.value.toLowerCase();
+  const names = document.querySelectorAll('.name'); 
+  
+  names.forEach(name => {
+    let employeeCard = document.querySelector('.card')[name];
+    let inputValue = employeeCard.textContent; 
+    if(inputValue.toLowerCase().indexof(filter) > -1){
+      employeeCard[name].style.display = 'grid';
+    }else{
+      employeeCard[name].style.display = 'none';
+    }
+  })
+}
+
 gridContainer.addEventListener('click', () => {
   if(event.target !== gridContainer){
     const card = event.target.closest('.card'); 
