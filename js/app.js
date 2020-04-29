@@ -8,13 +8,10 @@ const gridContainer = document.querySelector('.grid-container');
 const info = document.querySelector('#info');
 const modal = document.querySelector('.modal'); //overlay
 const modalContent = document.querySelector('.modal-content'); 
-const cards = document.querySelectorAll('.card');
-const close = document.querySelectorAll(".close");
 
 /* ===================================== 
    FUNCTIONS
 ======================================== */
-
 function checkStatus(response){
   if(response.ok){
     return Promise.resolve(response)
@@ -31,8 +28,8 @@ function fetchData(url){
 }
 
 function displayEmployees(employeeData){
-  employees = employeeData
-  
+  employees = employeeData 
+  console.log(employees)
   let employeeHTML = ''; 
 
   employees.forEach((employee, index) => {
@@ -66,16 +63,19 @@ function displayModal(index){
     location: { city, street, state, postcode},
     picture
   } = employees[index]
+
   let date = new Date(dob.date); 
   const modalHTML = `
-    <span class="close">&times;</span> 
+    <div class="close">&times;</div> 
     <div>
       <img src=${picture.medium} alt>
-      <p>${name.first} ${name.last}</p>
-      <p>${email}</p>
-      <p>${phone}</p>
-      <p>${city} ${street.name} ${state} ${postcode}</p>
-      <p>${date}</p>
+      <ul>
+        <li><h3>${name.first} ${name.last}</h3></li>
+        <li>${email}</li>
+        <li>${phone}</li>
+        <li>${city} ${street.name} ${state} ${postcode}</p>
+        <li>${date}</li>
+      </ul>
     </div>
   `
   info.style.display = 'block';

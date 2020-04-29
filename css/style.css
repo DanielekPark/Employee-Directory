@@ -9,6 +9,7 @@ BASE STYLES
 h1{
   text-align: center;
 }
+
 .card:hover{
   cursor: pointer;
 }
@@ -17,11 +18,9 @@ img{
   border-radius: 100%;
   width: 25%;
 }
-
 /* ===================================== 
  MAIN CONTENT
 ======================================== */
-
 .grid-container{
   display: grid;
   width: 95%;
@@ -38,7 +37,7 @@ img{
 
 .card{
   border: solid grey 1px;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .text-container{
   flex-direction: column;
@@ -48,24 +47,22 @@ img{
  MODAL WINDOW
 ======================================== */
 .modal{
-display: none; /* Hidden by default */
-position: fixed; /* Stay in place */
-z-index: 1; /* Sit on top */
-left: 0;
+display: none;
+position: fixed;
+z-index: 1;
 top: 0;
-width: 100%; /* Full width */
-height: 100%; /* Full height */
-overflow: auto; /* Enable scroll if needed */
-background-color: rgb(0,0,0); /* Fallback color */
-background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.4); 
 }
 
 .modal-content{
 background-color: #fefefe;
-margin: 15% auto; /* 15% from the top and centered */
+margin: 15% auto;
 padding: 20px;
 border: 1px solid #888;
-width: 80%; /* Could be more or less, depending on screen size */
+width: 50%;
 }
 
 .close {
@@ -80,6 +77,14 @@ font-weight: bold;
 color: black;
 text-decoration: none;
 cursor: pointer;
+}
+
+ul{
+  text-align: center;
+}
+
+li{
+  list-style-type: none;
 }
 /*
 CODE FOR MODAL WINDOW
