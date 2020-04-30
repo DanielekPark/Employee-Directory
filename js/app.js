@@ -9,7 +9,8 @@ const info = document.querySelector('#info');
 const modal = document.querySelector('.modal'); //overlay
 const modalContent = document.querySelector('.modal-content');
 const input = document.querySelector('input');
-let employeeIndex = 0;  
+const spans = document.querySelectorAll('span'); 
+let employeeIndex = 0;   
 
 /* ===================================== 
    FUNCTIONS
@@ -48,12 +49,11 @@ function displayEmployees(employeeData){
             <p class="email">${email}</p>
             <p class="city">${city}</p>
           </div>
-      </div>` 
-    
-  })
-
-  gridContainer.innerHTML = employeeHTML;
+      </div>`
   
+  })
+ 
+  gridContainer.innerHTML = employeeHTML;
 }
 
 function displayModal(index){
@@ -80,16 +80,17 @@ function displayModal(index){
         <li>${city} ${street.name} ${state} ${postcode}</p>
         <li>${date}</li>
       </ul>
-    </div>
-  `
+    </div>`
+
   info.style.display = 'block';
   modalContent.innerHTML = modalHTML; 
+
 }
 
 const search = () => {
   let filter = input.value.toLowerCase(); 
   const names = document.querySelectorAll('.name');  
-  console.log()
+
   names.forEach(name => {
     let searchNames = name.textContent.toLowerCase(); 
     let container = name.parentNode.parentNode;
@@ -116,35 +117,40 @@ gridContainer.addEventListener('click', () => {
 
 //CLOSES MODAL WINDOW
 modal.addEventListener('click', event => {
-    const close = event.target; 
-    if(close.className === 'close'){
+    if(event.target.className === 'close'){
       modal.style.display ='none'; 
     }
 })
 
 //SWITCHING MODAL WINDOW ARROWS FUNCTION
-// const slide = event => {
+const slide = event => {
+  let indices = cards.getAttribute('data-index');  
+
+  indices.forEach(index => {
+    if(arrow.textContent === '&larr;'){
+        employeeIndex++
+        displayModal(employeeIndex)
+    }else if(arrow.textContent === '&rarr;'){
+        employeeIndex--
+        displayModal(employeeIndex)
+    }
+  })
+}
+spans.forEach(span => span.addEventListener('click', slide))
+
+// modal.addEventListener('click', event => {
 //   const arrow = event.target;
-//   let indices = card.getAttribute('data-index');
+
+//   let indices = cards.getAttribute('data-index');
+
 //   indices.forEach(index => {
 //     if(arrow.textContent === '&larr;'){
-//         index++
+//         employeeIndex++
 //     }else if(arrow.textContent === '&rarr;'){
-//         index--
+//         employeeIndex--
 //     }
 //   })
-// }
-// spans.forEach(span => span.addEventListener('click', slide))
-modal.addEventListener('click', event => {
-const arrow = event.target; 
-
-if(arrow.textContent === '&larr;'){
-
-}else if(arrow.textContent === '&rarr;'){
-
-}
-
-}); 
+// })
 
 /* ===================================== 
  FETCH REQUESTS
@@ -154,6 +160,4 @@ fetchData(urlAPI)
   //.then(data => console.log(data))
   .then(data => displayEmployees(data))
 
-
- 
 })
