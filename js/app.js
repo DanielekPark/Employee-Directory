@@ -8,10 +8,10 @@ const gridContainer = document.querySelector('.grid-container');
 const info = document.querySelector('#info');
 const modal = document.querySelector('.modal'); //overlay
 const modalContent = document.querySelector('.modal-content');
-const input = document.querySelector('input');
-const spans = document.querySelectorAll('span'); 
-let employeeIndex = 0;   
-
+const input = document.querySelector('input'); 
+// let employeeIndex = 0; 
+// const back = document.querySelector('.back'); 
+// const forward = document.querySelector('.forward'); 
 /* ===================================== 
    FUNCTIONS
 ======================================== */
@@ -25,9 +25,9 @@ function checkStatus(response){
 
 function fetchData(url){
   return fetch(url)
-         .then(checkStatus)
-         .then(response => response.json() )
-         .catch(error => console.log('Looks like there was a problem', error) ); 
+          .then(checkStatus)
+          .then(response => response.json() )
+          .catch(error => console.log('Looks like there was a problem', error) ); 
 }
 
 function displayEmployees(employeeData){
@@ -66,13 +66,13 @@ function displayModal(index){
     picture
   } = employees[index]
 
-  let date = new Date(dob.date); 
+  let date = new Date(Date.parse(dob.date)).toLocaleDateString(navigator.language)
   const modalHTML = `
     <div class="close">&times;</div> 
     <div>
       <img class="modal-img" src=${picture.large} alt>
-      <span class="arrow">&larr;</span>
-      <span class="arrow">&rarr;</span>
+      <span class="arrow back">&larr;</span>
+      <span class="arrow forward">&rarr;</span>
       <ul>
         <li><h3 class="name">${name.first} ${name.last}</h3></li>
         <li>${email}</li>
@@ -82,6 +82,7 @@ function displayModal(index){
       </ul>
     </div>`
 
+  //employeeIndex = index
   info.style.display = 'block';
   modalContent.innerHTML = modalHTML; 
 
@@ -122,34 +123,14 @@ modal.addEventListener('click', event => {
     }
 })
 
-//SWITCHING MODAL WINDOW ARROWS FUNCTION
-const slide = event => {
-  let indices = cards.getAttribute('data-index');  
-
-  indices.forEach(index => {
-    if(arrow.textContent === '&larr;'){
-        employeeIndex++
-        displayModal(employeeIndex)
-    }else if(arrow.textContent === '&rarr;'){
-        employeeIndex--
-        displayModal(employeeIndex)
-    }
-  })
-}
-spans.forEach(span => span.addEventListener('click', slide))
-
 // modal.addEventListener('click', event => {
-//   const arrow = event.target;
-
-//   let indices = cards.getAttribute('data-index');
-
-//   indices.forEach(index => {
-//     if(arrow.textContent === '&larr;'){
-//         employeeIndex++
-//     }else if(arrow.textContent === '&rarr;'){
-//         employeeIndex--
-//     }
-//   })
+//   if(event.target.className === 'back'){
+//     employeeIndex++
+//     displayModal(employeeIndex)
+//   }else if(event.target.className === 'forward'){
+//     employeeIndex--
+//     displayModal(employeeIndex)
+//   }
 // })
 
 /* ===================================== 
