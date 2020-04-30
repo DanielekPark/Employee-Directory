@@ -8,6 +8,8 @@ const gridContainer = document.querySelector('.grid-container');
 const info = document.querySelector('#info');
 const modal = document.querySelector('.modal'); //overlay
 const modalContent = document.querySelector('.modal-content');
+const input = document.querySelector('input');
+let employeeIndex = 0;  
 
 /* ===================================== 
    FUNCTIONS
@@ -29,7 +31,7 @@ function fetchData(url){
 
 function displayEmployees(employeeData){
   employees = employeeData 
-  console.log(employees)
+
   let employeeHTML = ''; 
 
   employees.forEach((employee, index) => {
@@ -40,7 +42,7 @@ function displayEmployees(employeeData){
 
     employeeHTML += 
       `<div class="card" data-index="${index}">
-          <img class="avatar" src="${pictures.medium}">
+          <img class="avatar" src="${pictures.large}">
           <div class="text-container">
             <p class="name">${name.first} ${name.last}</p>
             <p class="email">${email}</p>
@@ -68,7 +70,9 @@ function displayModal(index){
   const modalHTML = `
     <div class="close">&times;</div> 
     <div>
-      <img class="modal-img" src=${picture.medium} alt>
+      <img class="modal-img" src=${picture.large} alt>
+      <span class="arrow">&larr;</span>
+      <span class="arrow">&rarr;</span>
       <ul>
         <li><h3 class="name">${name.first} ${name.last}</h3></li>
         <li>${email}</li>
@@ -82,46 +86,25 @@ function displayModal(index){
   modalContent.innerHTML = modalHTML; 
 }
 
-/* ===================================== 
-   EVENT LISTENERS
-======================================== */
-                /* ===================================== 
-                  SEARCH FUNCTION
-                ======================================== */
-// const input = document.querySelector('input'); 
-// const textContainer = document.querySelectorAll('.text-container'); 
-
-// const search = event => {
-//   const searchNames = event.target.value.toLowerCase(); 
-  
-//   textContainer.forEach(name => {
-//     const employeeCard = name.firstElementChild.textContent; 
-//     const container = employeeCard.parentElement;
-
-//     if(container.indexOf(searchNames) > -1){
-//       container.style.display ='grid';
-//     }else{
-//       container.style.display ='none'; 
-//     }
-//   })
-// }
-// input.addEventListener('keyup', search); 
-
 const search = () => {
-  const input = document.querySelector('input'); 
-  let filter = input.value.toLowerCase();
-  const names = document.querySelectorAll('.name'); 
-  
+  let filter = input.value.toLowerCase(); 
+  const names = document.querySelectorAll('.name');  
+  console.log()
   names.forEach(name => {
-    let employeeCard = document.querySelector('.card')[name];
-    let inputValue = employeeCard.textContent; 
-    if(inputValue.toLowerCase().indexof(filter) > -1){
-      employeeCard[name].style.display = 'grid';
+    let searchNames = name.textContent.toLowerCase(); 
+    let container = name.parentNode.parentNode;
+
+    if(searchNames.indexOf(filter) > -1){
+      container.style.display ='flex';
     }else{
-      employeeCard[name].style.display = 'none';
+      container.style.display ='none'; 
     }
   })
 }
+/* ===================================== 
+   EVENT LISTENERS
+======================================== */
+input.addEventListener('keyup', search); 
 
 gridContainer.addEventListener('click', () => {
   if(event.target !== gridContainer){
@@ -131,6 +114,7 @@ gridContainer.addEventListener('click', () => {
   }
 })
 
+//CLOSES MODAL WINDOW
 modal.addEventListener('click', event => {
     const close = event.target; 
     if(close.className === 'close'){
@@ -138,6 +122,29 @@ modal.addEventListener('click', event => {
     }
 })
 
+//SWITCHING MODAL WINDOW ARROWS FUNCTION
+// const slide = event => {
+//   const arrow = event.target;
+//   let indices = card.getAttribute('data-index');
+//   indices.forEach(index => {
+//     if(arrow.textContent === '&larr;'){
+//         index++
+//     }else if(arrow.textContent === '&rarr;'){
+//         index--
+//     }
+//   })
+// }
+// spans.forEach(span => span.addEventListener('click', slide))
+modal.addEventListener('click', event => {
+const arrow = event.target; 
+
+if(arrow.textContent === '&larr;'){
+
+}else if(arrow.textContent === '&rarr;'){
+
+}
+
+}); 
 
 /* ===================================== 
  FETCH REQUESTS
@@ -147,6 +154,6 @@ fetchData(urlAPI)
   //.then(data => console.log(data))
   .then(data => displayEmployees(data))
 
- 
 
+ 
 })
