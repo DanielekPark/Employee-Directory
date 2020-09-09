@@ -1,30 +1,30 @@
 /* ===================================== 
 BASE STYLES
 ======================================== */
-*{
+* {
   box-sizing: border-box;
-  font-family: 'Varela Round'; 
+  font-family: 'Varela Round';
 }
 
-h1{
+h1 {
   text-align: center;
 }
 
-img{
+img {
   border-radius: 50%;
   flex-basis: 25%;
   align-self: center;
   width: 25%;
 }
 
-input{
-  width: 45%; 
-  margin: 0 auto; 
+input {
+  width: 45%;
+  margin: 0 auto;
 }
 /* ===================================== 
  MAIN CONTENT
 ======================================== */
-.grid-container{
+.grid-container {
   display: grid;
   width: 95%;
   max-width: 1000px;
@@ -35,29 +35,29 @@ input{
 
 .wrapper,
 .card,
-.text-container{
-  display: flex; 
+.text-container {
+  display: flex;
 }
 
-.card:hover{
+.card:hover {
   cursor: pointer;
 }
 
-.card{
+.card {
   border: solid grey 1px;
   justify-content: space-between;
 }
 
-.text-container{
+.text-container {
   flex-direction: column;
   flex-basis: 70%;
-  word-break: break-all; 
+  word-break: break-all;
 }
 
 /* ===================================== 
  MODAL WINDOW
 ======================================== */
-.modal{
+.modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -65,10 +65,10 @@ input{
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4); 
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content{
+.modal-content {
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
@@ -93,37 +93,23 @@ input{
 CODE FOR MODAL WINDOW
 https://www.w3schools.com/howto/howto_css_modals.asp
 */
-.modal-img{
-  display: block; 
-  margin: 0 auto; 
+.modal-img {
+  display: block;
+  margin: 0 auto;
 }
 
-ul{
+ul {
   text-align: center;
 }
 
-li{
+li {
   list-style-type: none;
-}
-.arrow:hover{
-  cursor: pointer;
-}
-.arrow{
-  font-size: 3em; 
-}
-
-.arrow:nth-of-type(1) {
-  float: left; 
-}
-
-.arrow:nth-of-type(2) {
-  float: right; 
 }
 
 /* ===================================== 
  MEDIA QUERIES
 ======================================== */
-@media(min-width: 768px) {
+@media (min-width: 768px) {
   img {
     margin-left: 10px;
   }
@@ -133,6 +119,6 @@ li{
   }
 
   .grid-container {
-    grid-gap: 25px; 
+    grid-gap: 25px;
   }
 }
